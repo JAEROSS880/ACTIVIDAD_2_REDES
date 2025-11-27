@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Actividad 2 – Redes</title>
+  <style>
+    :root {
+      --bg-main: #020617;
+      --card: rgba(15, 23, 42, 0.96);
+      --border-soft: rgba(148, 163, 184, 0.5);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.5);
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+    }
+
+    h1, h2 {
+      margin: 0 0 0.5rem;
+    }
+
+    .main-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero {
+      padding: 1.75rem 1.5rem 1rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 1.6rem;
+    }
+
+    .hero p {
+      margin: 0.25rem 0 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    /* Nodos = botones grandes */
+
+    .nodes-wrapper {
+      padding: 0 1.5rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .node {
+      width: 100%;
+      max-width: 680px;
+      margin: 0.5rem auto;
+      padding: 0.9rem 1.2rem;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid rgba(248, 250, 252, 0.16);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease,
+        border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .node:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .node.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 26px var(--accent-soft);
+    }
+
+    .sections {
+      padding: 0 1.5rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .solution {
+      display: none;
+      margin-top: 1.2rem;
+      margin-bottom: 2.1rem;
+      padding: 1.5rem 1.4rem;
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.85);
+    }
+
+    .solution.visible {
+      display: block;
+    }
+
+    .solution h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin: 0.25rem 0 0.5rem;
+      color: var(--text-soft);
+    }
+
+    ul {
+      margin: 0.3rem 0 0.3rem 1.1rem;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    li {
+      margin-bottom: 0.22rem;
+    }
+
+    .step-title {
+      font-weight: 600;
+      margin-top: 0.7rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.08rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--border-soft);
+      margin-bottom: 0.5rem;
+      color: var(--text-soft);
+    }
+
+    @media (max-width: 720px) {
+      .node {
+        font-size: 0.85rem;
+        padding: 0.8rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <header class="hero">
+      <h1>Actividad 2 – Diseño de soluciones</h1>
+      <p>Pulsa en una solución para ver la explicación completa paso a paso.</p>
+    </header>
+
+    <!-- NODOS / BOTONES -->
+    <div class="nodes-wrapper">
+      <div class="node active" data-target="sol1">
+        Solución 1 – Una única LAN lo más barata posible
+      </div>
+      <div class="node" data-target="sol2">
+        Solución 2 – Varias LAN gastando prácticamente lo mismo
+      </div>
+    </div>
+
+    <!-- SOLO LAS DOS SOLUCIONES, EXPLICADAS PASO A PASO -->
+
+    <main class="sections">
+      <!-- SOLUCIÓN 1 -->
+      <section id="sol1" class="solution visible">
+        <div class="tag">Solución 1 – Una única LAN</div>
+        <h2>Solución 1 – Una única LAN lo más barata posible</h2>
+
+        <p><strong>Objetivo:</strong> montar <strong>solo una LAN</strong> donde los 24 ordenadores tengan Internet, el móvil A tenga Internet y el móvil C pueda conectarse con el móvil B, gastando lo mínimo posible.</p>
+
+        <p class="step-title">1. Qué tengo de partida</p>
+        <ul>
+          <li>1 router sin WiFi con <strong>5 conexiones</strong> LAN.</li>
+          <li>1 <strong>switch de 20 conexiones</strong>.</li>
+          <li>24 ordenadores de sobremesa:
+            <ul>
+              <li>23 con adaptador de red por <strong>cable</strong>.</li>
+              <li>1 sin adaptador (se lo tengo que poner).</li>
+            </ul>
+          </li>
+          <li>Móvil A: Bluetooth, WiFi y <strong>4G con contrato</strong> (ya tiene Internet por datos).</li>
+          <li>Móvil B: Bluetooth, WiFi y <strong>5G con contrato</strong> (también tiene Internet por datos).</li>
+          <li>Móvil C: Bluetooth, WiFi y 4G <strong>sin contrato</strong> (no tiene Internet todavía).</li>
+        </ul>
+
+        <p class="step-title">2. Qué decido comprar (minimizando gasto)</p>
+        <ul>
+          <li><strong>1 adaptador de red por cable</strong> (tarjeta o USB–Ethernet) para el PC que no lo tenía.</li>
+          <li><strong>1 switch de 5 conexiones</strong> (el modelo más pequeño posible).</li>
+          <li>Cables <strong>RJ45</strong> para:
+            <ul>
+              <li>24 cables para los 24 PCs.</li>
+              <li>1 cable router ⇄ switch de 20 puertos.</li>
+              <li>1 cable switch de 20 ⇄ switch de 5 puertos.</li>
+            </ul>
+            En total: <strong>26 cables</strong>.
+          </li>
+          <li><strong>1 contrato de conexión a Internet</strong> para el router (con mi ISP). Solo uno.</li>
+        </ul>
+
+        <p class="step-title">3. Cómo monto físicamente la única LAN</p>
+        <p>La idea es que todos los PCs formen <strong>una única red local</strong> cableada alrededor del router y los switches.</p>
+        <ul>
+          <li><strong>Paso 1:</strong> conecto el router a Internet usando el contrato con el ISP (en el puerto WAN del router).</li>
+          <li><strong>Paso 2:</strong> uso un cable RJ45 para conectar <strong>un puerto LAN del router</strong> a <strong>un puerto del switch de 20 conexiones</strong>.</li>
+          <li><strong>Paso 3:</strong> uso otro cable RJ45 para conectar <strong>un puerto del switch de 20</strong> al <strong>switch de 5 conexiones</strong>.</li>
+          <li><strong>Paso 4:</strong> instalo el nuevo adaptador de red por cable en el PC que no lo tenía, para que los 24 PCs puedan usar RJ45.</li>
+        </ul>
+
+        <p>Ahora reparto los ordenadores entre el router y los switches, respetando los puertos:</p>
+        <ul>
+          <li>En el <strong>router (5 puertos LAN)</strong>:
+            <ul>
+              <li>1 puerto ya está ocupado para ir al switch de 20.</li>
+              <li>Me quedan <strong>4 puertos libres</strong>.</li>
+              <li>Conecto <strong>3 PCs directamente</strong> al router (dejo 1 puerto libre de reserva).</li>
+            </ul>
+          </li>
+          <li>En el <strong>switch de 20 puertos</strong>:
+            <ul>
+              <li>1 puerto va al router.</li>
+              <li>1 puerto va al switch de 5.</li>
+              <li>Me quedan <strong>18 puertos libres</strong>.</li>
+              <li>Conecto ahí <strong>17 PCs</strong>, dejando 1 puerto libre de reserva.</li>
+            </ul>
+          </li>
+          <li>En el <strong>switch de 5 puertos</strong>:
+            <ul>
+              <li>1 puerto va al switch de 20.</li>
+              <li>Me quedan <strong>4 puertos libres</strong>.</li>
+              <li>Conecto ahí <strong>4 PCs</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p>Si sumo: 3 PCs (router) + 17 PCs (switch grande) + 4 PCs (switch pequeño) = <strong>24 PCs con Internet</strong> usando una sola LAN y un solo contrato con el ISP.</p>
+
+        <p class="step-title">4. Qué hago con los móviles en esta solución</p>
+        <ul>
+          <li><strong>Móvil A:</strong> ya tiene 4G contratado, así que para que tenga Internet no necesito meterlo en la LAN. Simplemente usa sus <strong>datos móviles</strong>.</li>
+          <li><strong>Móvil B:</strong> igual, usa sus datos 5G para tener Internet. No hace falta gastar nada más.</li>
+          <li><strong>Móvil C:</strong> solo necesito que se pueda conectar con el móvil B, no que tenga Internet propio. Para <strong>ahorrar dinero</strong>:
+            <ul>
+              <li>Emparejo el móvil C con el móvil B por <strong>Bluetooth</strong>.</li>
+              <li>Así pueden enviarse archivos o comunicarse entre ellos sin contratar 4G para C.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p>Así consigo cumplir todo lo que pide la actividad con una sola LAN:</p>
+        <ul>
+          <li>Los <strong>24 ordenadores</strong> tienen Internet a través del router y los switches.</li>
+          <li>El <strong>móvil A</strong> tiene Internet gracias a su 4G.</li>
+          <li>El <strong>móvil C se conecta con el móvil B</strong> usando Bluetooth.</li>
+          <li>Solo compro: 1 adaptador de red, 1 switch pequeño, cables y 1 contrato de ISP.</li>
+        </ul>
+      </section>
+
+      <!-- SOLUCIÓN 2 -->
+      <section id="sol2" class="solution">
+        <div class="tag">Solución 2 – Varias LAN</div>
+        <h2>Solución 2 – Varias LAN gastando prácticamente lo mismo</h2>
+
+        <p><strong>Objetivo:</strong> ahora sí quiero que en el diseño haya <strong>varias redes LAN</strong>, pero manteniendo el gasto mínimo y cumpliendo lo mismo: 24 PCs con Internet, móvil A con Internet y móvil C conectado con B.</p>
+
+        <p class="step-title">1. Mantengo el mismo hardware básico</p>
+        <p>Para no subir el gasto, reutilizo lo mismo que en la Solución 1:</p>
+        <ul>
+          <li>Router sin WiFi (5 conexiones).</li>
+          <li>Switch de 20 conexiones.</li>
+          <li>Switch de 5 conexiones (el que ya he comprado).</li>
+          <li>24 PCs (con el adaptador de red extra ya instalado en el PC nº 24).</li>
+          <li>Cables RJ45 para todos los enlaces.</li>
+          <li>1 contrato con el ISP para el router.</li>
+        </ul>
+
+        <p>La parte de los ordenadores la dejo igual que antes, porque ya estaba optimizada y funciona perfecta.</p>
+
+        <p class="step-title">2. Primera LAN: red cableada de los 24 PCs</p>
+        <p>La <strong>LAN 1</strong> es la misma que en la Solución 1:</p>
+        <ul>
+          <li>Router conectado a Internet por el ISP.</li>
+          <li>Router conectado al switch de 20.</li>
+          <li>Switch de 20 conectado al switch de 5.</li>
+          <li>24 PCs repartidos entre router + switch de 20 + switch de 5.</li>
+        </ul>
+        <p>Todos esos dispositivos forman una <strong>misma LAN cableada</strong> y comparten la misma salida a Internet del router.</p>
+
+        <p class="step-title">3. Segunda LAN: red WiFi creada con el móvil A</p>
+        <p>Aquí hago algo menos esperado pero totalmente válido:</p>
+        <ul>
+          <li>El móvil A ya tiene <strong>4G con contrato</strong>.</li>
+          <li>Activo en el móvil A la opción de <strong>zona WiFi / compartir Internet</strong> (hotspot).</li>
+          <li>Al hacer esto, el móvil A se convierte en:
+            <ul>
+              <li>Un pequeño “router” usando su 4G como salida a Internet.</li>
+              <li><strong>Punto de acceso WiFi</strong> que crea una red local alrededor suyo.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p>La red WiFi que crea el móvil A es otra <strong>LAN inalámbrica</strong>, distinta de la LAN cableada de los PCs.</p>
+
+        <p class="step-title">4. Qué conecto a esa segunda LAN</p>
+        <ul>
+          <li>Conecto el <strong>móvil B</strong> a la WiFi del móvil A.</li>
+          <li>Conecto el <strong>móvil C</strong> a la misma WiFi del móvil A.</li>
+        </ul>
+
+        <p>Al estar los tres en la misma WiFi del móvil A:</p>
+        <ul>
+          <li>Forman una <strong>segunda LAN</strong> (LAN 2) de tipo WiFi.</li>
+          <li>El móvil A comparte su 4G con B y C, así que los tres pueden tener Internet desde esa red.</li>
+          <li>El móvil C puede <strong>conectarse con el móvil B</strong> porque están en la misma red local.</li>
+        </ul>
+
+        <p class="step-title">5. Resumen de cómo quedan las redes</p>
+        <ul>
+          <li><strong>LAN 1 (cableada):</strong>
+            <ul>
+              <li>Router + switch de 20 + switch de 5 + 24 PCs.</li>
+              <li>Todos con Internet a través del contrato del router.</li>
+            </ul>
+          </li>
+          <li><strong>LAN 2 (WiFi del móvil A):</strong>
+            <ul>
+              <li>Móvil A actuando como router WiFi con su 4G.</li>
+              <li>Móvil B y móvil C conectados a esa WiFi.</li>
+              <li>Los tres móviles se pueden comunicar entre ellos a nivel local.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p class="step-title">6. Gasto y condiciones cumplidas</p>
+        <p>En esta solución:</p>
+        <ul>
+          <li>No compro más hardware extra aparte de lo de la Solución 1.</li>
+          <li>No contrato más conexiones con el ISP (sigo con:
+            <ul>
+              <li>Contrato del router para los PCs.</li>
+              <li>Contrato 4G de A y 5G de B que ya existían.</li>
+            </ul>
+          </li>
+          <li>Aprovecho que el móvil A puede crear una WiFi propia para montar una segunda LAN sin pagar nada más.</li>
+        </ul>
+
+        <p>Se cumplen todas las condiciones:</p>
+        <ul>
+          <li>Los <strong>24 ordenadores</strong> se conectan a Internet (LAN 1).</li>
+          <li>El <strong>móvil A</strong> tiene Internet por su 4G y además sirve de router WiFi.</li>
+          <li>El <strong>móvil C</strong> se conecta con el <strong>móvil B</strong> dentro de la LAN WiFi del móvil A.</li>
+          <li>Y ahora sí, en el diseño hay <strong>varias LAN</strong> (una cableada y otra WiFi) sin disparar el presupuesto.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Click en los nodos → muestro solo la solución correspondiente
+    const nodes = document.querySelectorAll(".node[data-target]");
+    const solutions = document.querySelectorAll(".solution");
+
+    nodes.forEach((node) => {
+      node.addEventListener("click", () => {
+        const targetId = node.getAttribute("data-target");
+
+        // activar/desactivar estilo de nodo
+        nodes.forEach((n) => n.classList.remove("active"));
+        node.classList.add("active");
+
+        // mostrar solo la solución seleccionada
+        solutions.forEach((s) => {
+          if (s.id === targetId) {
+            s.classList.add("visible");
+            // scroll suave hasta el principio de la solución
+            const top = s.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top, behavior: "smooth" });
+          } else {
+            s.classList.remove("visible");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
