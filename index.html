@@ -186,6 +186,22 @@
 
         <p><strong>Objetivo:</strong> montar <strong>solo una LAN</strong> donde los 24 ordenadores tengan Internet, el móvil A tenga Internet y el móvil C pueda conectarse con el móvil B, gastando lo mínimo posible.</p>
 
+        <!-- DIBUJO SOLUCIÓN 1 -->
+        <div style="margin:20px auto; max-width:500px; text-align:center;">
+          <p><strong>Esquema – Solución 1</strong></p>
+          <pre style="background:#0f172a; padding:12px; border-radius:12px; color:#38bdf8; font-size:13px; overflow:auto;">
+                 INTERNET
+                     │
+                  [ ROUTER ]
+                ┌────┼────┐
+             PC1 PC2 PC3 PC4
+                     │
+                [ SWITCH 20 ]
+                     │
+             20 PCs conectados
+          </pre>
+        </div>
+
         <p class="step-title">1. Qué tengo de partida</p>
         <ul>
           <li>1 router sin WiFi con <strong>5 conexiones</strong> LAN.</li>
@@ -204,54 +220,42 @@
         <p class="step-title">2. Qué decido comprar (minimizando gasto)</p>
         <ul>
           <li><strong>1 adaptador de red por cable</strong> (tarjeta o USB–Ethernet) para el PC que no lo tenía.</li>
-          <li><strong>1 switch de 5 conexiones</strong> (el modelo más pequeño posible).</li>
           <li>Cables <strong>RJ45</strong> para:
             <ul>
               <li>24 cables para los 24 PCs.</li>
               <li>1 cable router ⇄ switch de 20 puertos.</li>
-              <li>1 cable switch de 20 ⇄ switch de 5 puertos.</li>
             </ul>
-            En total: <strong>26 cables</strong>.
+            En total: <strong>25 cables</strong>.
           </li>
           <li><strong>1 contrato de conexión a Internet</strong> para el router (con mi ISP). Solo uno.</li>
         </ul>
 
         <p class="step-title">3. Cómo monto físicamente la única LAN</p>
-        <p>La idea es que todos los PCs formen <strong>una única red local</strong> cableada alrededor del router y los switches.</p>
+        <p>La idea es que todos los PCs formen <strong>una única red local</strong> cableada alrededor del router y el switch.</p>
         <ul>
           <li><strong>Paso 1:</strong> conecto el router a Internet usando el contrato con el ISP (en el puerto WAN del router).</li>
           <li><strong>Paso 2:</strong> uso un cable RJ45 para conectar <strong>un puerto LAN del router</strong> a <strong>un puerto del switch de 20 conexiones</strong>.</li>
-          <li><strong>Paso 3:</strong> uso otro cable RJ45 para conectar <strong>un puerto del switch de 20</strong> al <strong>switch de 5 conexiones</strong>.</li>
-          <li><strong>Paso 4:</strong> instalo el nuevo adaptador de red por cable en el PC que no lo tenía, para que los 24 PCs puedan usar RJ45.</li>
+          <li><strong>Paso 3:</strong> instalo el nuevo adaptador de red por cable en el PC que no lo tenía, para que los 24 PCs puedan usar RJ45.</li>
         </ul>
 
-        <p>Ahora reparto los ordenadores entre el router y los switches, respetando los puertos:</p>
+        <p>Ahora reparto los ordenadores entre el router y el switch, respetando los puertos:</p>
         <ul>
           <li>En el <strong>router (5 puertos LAN)</strong>:
             <ul>
               <li>1 puerto ya está ocupado para ir al switch de 20.</li>
               <li>Me quedan <strong>4 puertos libres</strong>.</li>
-              <li>Conecto <strong>3 PCs directamente</strong> al router (dejo 1 puerto libre de reserva).</li>
+              <li>Conecto <strong>4 PCs directamente</strong> al router.</li>
             </ul>
           </li>
           <li>En el <strong>switch de 20 puertos</strong>:
             <ul>
               <li>1 puerto va al router.</li>
-              <li>1 puerto va al switch de 5.</li>
-              <li>Me quedan <strong>18 puertos libres</strong>.</li>
-              <li>Conecto ahí <strong>17 PCs</strong>, dejando 1 puerto libre de reserva.</li>
-            </ul>
-          </li>
-          <li>En el <strong>switch de 5 puertos</strong>:
-            <ul>
-              <li>1 puerto va al switch de 20.</li>
-              <li>Me quedan <strong>4 puertos libres</strong>.</li>
-              <li>Conecto ahí <strong>4 PCs</strong>.</li>
+              <li>Los <strong>20 PCs restantes</strong> se conectan a los otros 20 puertos.</li>
             </ul>
           </li>
         </ul>
 
-        <p>Si sumo: 3 PCs (router) + 17 PCs (switch grande) + 4 PCs (switch pequeño) = <strong>24 PCs con Internet</strong> usando una sola LAN y un solo contrato con el ISP.</p>
+        <p>Si sumo: 4 PCs (router) + 20 PCs (switch grande) = <strong>24 PCs con Internet</strong> usando una sola LAN y un solo contrato con el ISP.</p>
 
         <p class="step-title">4. Qué hago con los móviles en esta solución</p>
         <ul>
@@ -267,10 +271,10 @@
 
         <p>Así consigo cumplir todo lo que pide la actividad con una sola LAN:</p>
         <ul>
-          <li>Los <strong>24 ordenadores</strong> tienen Internet a través del router y los switches.</li>
+          <li>Los <strong>24 ordenadores</strong> tienen Internet a través del router y el switch de 20.</li>
           <li>El <strong>móvil A</strong> tiene Internet gracias a su 4G.</li>
           <li>El <strong>móvil C se conecta con el móvil B</strong> usando Bluetooth.</li>
-          <li>Solo compro: 1 adaptador de red, 1 switch pequeño, cables y 1 contrato de ISP.</li>
+          <li>Solo compro: 1 adaptador de red, cables y 1 contrato de ISP.</li>
         </ul>
       </section>
 
@@ -281,12 +285,33 @@
 
         <p><strong>Objetivo:</strong> ahora sí quiero que en el diseño haya <strong>varias redes LAN</strong>, pero manteniendo el gasto mínimo y cumpliendo lo mismo: 24 PCs con Internet, móvil A con Internet y móvil C conectado con B.</p>
 
+        <!-- DIBUJO SOLUCIÓN 2 -->
+        <div style="margin:20px auto; max-width:500px; text-align:center;">
+          <p><strong>Esquema – Solución 2</strong></p>
+          <pre style="background:#0f172a; padding:12px; border-radius:12px; color:#38bdf8; font-size:13px; overflow:auto;">
+            LAN 1 (Cableada)
+                 INTERNET
+                     │
+                  [ ROUTER ]
+                     │
+                [ SWITCH 20 ]
+                     │
+                 24 PCs
+
+
+             LAN 2 (WiFi del móvil A)
+                [ MÓVIL A ]
+                  ))))))  WiFi
+                 ┌───────┐
+              [ MÓVIL B ] [ MÓVIL C ]
+          </pre>
+        </div>
+
         <p class="step-title">1. Mantengo el mismo hardware básico</p>
         <p>Para no subir el gasto, reutilizo lo mismo que en la Solución 1:</p>
         <ul>
           <li>Router sin WiFi (5 conexiones).</li>
           <li>Switch de 20 conexiones.</li>
-          <li>Switch de 5 conexiones (el que ya he comprado).</li>
           <li>24 PCs (con el adaptador de red extra ya instalado en el PC nº 24).</li>
           <li>Cables RJ45 para todos los enlaces.</li>
           <li>1 contrato con el ISP para el router.</li>
@@ -295,12 +320,11 @@
         <p>La parte de los ordenadores la dejo igual que antes, porque ya estaba optimizada y funciona perfecta.</p>
 
         <p class="step-title">2. Primera LAN: red cableada de los 24 PCs</p>
-        <p>La <strong>LAN 1</strong> es la misma que en la Solución 1:</p>
+        <p>La <strong>LAN 1</strong> es prácticamente la misma que en la Solución 1:</p>
         <ul>
           <li>Router conectado a Internet por el ISP.</li>
           <li>Router conectado al switch de 20.</li>
-          <li>Switch de 20 conectado al switch de 5.</li>
-          <li>24 PCs repartidos entre router + switch de 20 + switch de 5.</li>
+          <li>24 PCs repartidos entre router + switch de 20 (4 en el router, 20 en el switch).</li>
         </ul>
         <p>Todos esos dispositivos forman una <strong>misma LAN cableada</strong> y comparten la misma salida a Internet del router.</p>
 
@@ -336,7 +360,7 @@
         <ul>
           <li><strong>LAN 1 (cableada):</strong>
             <ul>
-              <li>Router + switch de 20 + switch de 5 + 24 PCs.</li>
+              <li>Router + switch de 20 + 24 PCs.</li>
               <li>Todos con Internet a través del contrato del router.</li>
             </ul>
           </li>
