@@ -51,8 +51,6 @@
       color: var(--text-soft);
     }
 
-    /* Nodos = botones grandes */
-
     .nodes-wrapper {
       padding: 0 1.5rem 1.5rem;
       max-width: 900px;
@@ -166,7 +164,6 @@
       <p>Pulsa en una solución para ver la explicación completa paso a paso.</p>
     </header>
 
-    <!-- NODOS / BOTONES -->
     <div class="nodes-wrapper">
       <div class="node active" data-target="sol1">
         Solución 1 – Una única LAN lo más barata posible
@@ -175,8 +172,6 @@
         Solución 2 – Varias LAN gastando prácticamente lo mismo
       </div>
     </div>
-
-    <!-- SOLO LAS DOS SOLUCIONES, EXPLICADAS PASO A PASO -->
 
     <main class="sections">
       <!-- SOLUCIÓN 1 -->
@@ -193,74 +188,83 @@
                  INTERNET
                      │
                   [ ROUTER ]
-                ┌────┼────┐
-             PC1 PC2 PC3 PC4
-                     │
-                [ SWITCH 20 ]
-                     │
-             20 PCs conectados
+                ┌────┴────┐
+             4 PCs     [ SWITCH 20 ]
+                            │
+                        [ SWITCH 5 ]
+                            │
+                         20 PCs
           </pre>
         </div>
 
         <p class="step-title">1. Qué tengo de partida</p>
         <ul>
           <li>1 router sin WiFi con <strong>5 conexiones</strong> LAN.</li>
-          <li>1 <strong>switch de 20 conexiones</strong>.</li>
+          <li>1 <strong>switch de 20 conexiones</strong> (sin puerto “extra” solo de entrada).</li>
           <li>24 ordenadores de sobremesa:
             <ul>
               <li>23 con adaptador de red por <strong>cable</strong>.</li>
               <li>1 sin adaptador (se lo tengo que poner).</li>
             </ul>
           </li>
-          <li>Móvil A: Bluetooth, WiFi y <strong>4G con contrato</strong> (ya tiene Internet por datos).</li>
-          <li>Móvil B: Bluetooth, WiFi y <strong>5G con contrato</strong> (también tiene Internet por datos).</li>
-          <li>Móvil C: Bluetooth, WiFi y 4G <strong>sin contrato</strong> (no tiene Internet todavía).</li>
+          <li>Móvil A: Bluetooth, WiFi y <strong>4G con contrato</strong>.</li>
+          <li>Móvil B: Bluetooth, WiFi y <strong>5G con contrato</strong>.</li>
+          <li>Móvil C: Bluetooth, WiFi y 4G <strong>sin contrato</strong>.</li>
         </ul>
 
         <p class="step-title">2. Qué decido comprar (minimizando gasto)</p>
         <ul>
           <li><strong>1 adaptador de red por cable</strong> (tarjeta o USB–Ethernet) para el PC que no lo tenía.</li>
+          <li><strong>1 switch de 5 conexiones</strong> para completar los puertos que faltan.</li>
           <li>Cables <strong>RJ45</strong> para:
             <ul>
               <li>24 cables para los 24 PCs.</li>
               <li>1 cable router ⇄ switch de 20 puertos.</li>
+              <li>1 cable switch de 20 ⇄ switch de 5 puertos.</li>
             </ul>
-            En total: <strong>25 cables</strong>.
+            En total: <strong>26 cables</strong>.
           </li>
-          <li><strong>1 contrato de conexión a Internet</strong> para el router (con mi ISP). Solo uno.</li>
+          <li><strong>1 contrato de conexión a Internet</strong> para el router (ISP).</li>
         </ul>
 
         <p class="step-title">3. Cómo monto físicamente la única LAN</p>
-        <p>La idea es que todos los PCs formen <strong>una única red local</strong> cableada alrededor del router y el switch.</p>
+        <p>La idea es que todos los PCs formen <strong>una única red local</strong> cableada alrededor del router y los dos switches.</p>
         <ul>
-          <li><strong>Paso 1:</strong> conecto el router a Internet usando el contrato con el ISP (en el puerto WAN del router).</li>
+          <li><strong>Paso 1:</strong> conecto el router a Internet usando el contrato con el ISP (puerto WAN).</li>
           <li><strong>Paso 2:</strong> uso un cable RJ45 para conectar <strong>un puerto LAN del router</strong> a <strong>un puerto del switch de 20 conexiones</strong>.</li>
-          <li><strong>Paso 3:</strong> instalo el nuevo adaptador de red por cable en el PC que no lo tenía, para que los 24 PCs puedan usar RJ45.</li>
+          <li><strong>Paso 3:</strong> desde el switch de 20, conecto con otro cable RJ45 un puerto al <strong>switch de 5 conexiones</strong>.</li>
+          <li><strong>Paso 4:</strong> instalo el nuevo adaptador de red por cable en el PC que no lo tenía, para que los 24 PCs puedan usar RJ45.</li>
         </ul>
 
-        <p>Ahora reparto los ordenadores entre el router y el switch, respetando los puertos:</p>
+        <p>Ahora reparto los ordenadores entre router, switch de 20 y switch de 5:</p>
         <ul>
           <li>En el <strong>router (5 puertos LAN)</strong>:
             <ul>
-              <li>1 puerto ya está ocupado para ir al switch de 20.</li>
-              <li>Me quedan <strong>4 puertos libres</strong>.</li>
-              <li>Conecto <strong>4 PCs directamente</strong> al router.</li>
+              <li>1 puerto va al switch de 20.</li>
+              <li>Uso los otros <strong>4 puertos</strong> para conectar <strong>4 PCs directamente</strong> al router.</li>
             </ul>
           </li>
           <li>En el <strong>switch de 20 puertos</strong>:
             <ul>
               <li>1 puerto va al router.</li>
-              <li>Los <strong>20 PCs restantes</strong> se conectan a los otros 20 puertos.</li>
+              <li>1 puerto va al switch de 5.</li>
+              <li>Conecto <strong>18 PCs</strong> a los puertos restantes.</li>
+            </ul>
+          </li>
+          <li>En el <strong>switch de 5 puertos</strong>:
+            <ul>
+              <li>1 puerto va al switch de 20.</li>
+              <li>Conecto en este switch los <strong>2 PCs que faltan</strong>.</li>
             </ul>
           </li>
         </ul>
 
-        <p>Si sumo: 4 PCs (router) + 20 PCs (switch grande) = <strong>24 PCs con Internet</strong> usando una sola LAN y un solo contrato con el ISP.</p>
+        <p>Si sumo: 4 PCs (router) + 18 PCs (switch de 20) + 2 PCs (switch de 5) = <strong>24 PCs con Internet</strong> usando una sola LAN y un solo contrato con el ISP (aunque sobren algunos puertos libres).</p>
 
         <p class="step-title">4. Qué hago con los móviles en esta solución</p>
         <ul>
-          <li><strong>Móvil A:</strong> ya tiene 4G contratado, así que para que tenga Internet no necesito meterlo en la LAN. Simplemente usa sus <strong>datos móviles</strong>.</li>
-          <li><strong>Móvil B:</strong> igual, usa sus datos 5G para tener Internet. No hace falta gastar nada más.</li>
+          <li><strong>Móvil A:</strong> ya tiene 4G contratado, así que para que tenga Internet no necesito meterlo en la LAN. Usa sus <strong>datos móviles</strong>.</li>
+          <li><strong>Móvil B:</strong> igual, usa sus datos 5G para tener Internet, sin gastar nada más.</li>
           <li><strong>Móvil C:</strong> solo necesito que se pueda conectar con el móvil B, no que tenga Internet propio. Para <strong>ahorrar dinero</strong>:
             <ul>
               <li>Emparejo el móvil C con el móvil B por <strong>Bluetooth</strong>.</li>
@@ -269,12 +273,12 @@
           </li>
         </ul>
 
-        <p>Así consigo cumplir todo lo que pide la actividad con una sola LAN:</p>
+        <p>Así cumplo todo lo que pide la actividad con una sola LAN:</p>
         <ul>
-          <li>Los <strong>24 ordenadores</strong> tienen Internet a través del router y el switch de 20.</li>
+          <li>Los <strong>24 ordenadores</strong> tienen Internet a través del router, el switch de 20 y el switch de 5.</li>
           <li>El <strong>móvil A</strong> tiene Internet gracias a su 4G.</li>
           <li>El <strong>móvil C se conecta con el móvil B</strong> usando Bluetooth.</li>
-          <li>Solo compro: 1 adaptador de red, cables y 1 contrato de ISP.</li>
+          <li>Solo compro: 1 adaptador de red, 1 switch de 5, cables y 1 contrato de ISP.</li>
         </ul>
       </section>
 
@@ -293,13 +297,15 @@
                  INTERNET
                      │
                   [ ROUTER ]
-                     │
-                [ SWITCH 20 ]
-                     │
-                 24 PCs
+                ┌────┴────┐
+             4 PCs     [ SWITCH 20 ]
+                            │
+                        [ SWITCH 5 ]
+                            │
+                         20 PCs
 
 
-             LAN 2 (WiFi del móvil A)
+            LAN 2 (WiFi del móvil A)
                 [ MÓVIL A ]
                   ))))))  WiFi
                  ┌───────┐
@@ -312,28 +318,34 @@
         <ul>
           <li>Router sin WiFi (5 conexiones).</li>
           <li>Switch de 20 conexiones.</li>
-          <li>24 PCs (con el adaptador de red extra ya instalado en el PC nº 24).</li>
-          <li>Cables RJ45 para todos los enlaces.</li>
+          <li>Switch de 5 conexiones.</li>
+          <li>24 PCs (con el adaptador de red extra ya instalado).</li>
+          <li><strong>26 cables RJ45</strong> (24 para PCs y 2 para los enlaces entre equipos de red).</li>
           <li>1 contrato con el ISP para el router.</li>
         </ul>
 
-        <p>La parte de los ordenadores la dejo igual que antes, porque ya estaba optimizada y funciona perfecta.</p>
-
-        <p class="step-title">2. Primera LAN: red cableada de los 24 PCs</p>
-        <p>La <strong>LAN 1</strong> es prácticamente la misma que en la Solución 1:</p>
+        <p class="step-title">2. Primera LAN: red cableada de los 24 PCs (LAN 1)</p>
+        <p>La <strong>LAN 1</strong> es la misma que en la Solución 1:</p>
         <ul>
-          <li>Router conectado a Internet por el ISP.</li>
-          <li>Router conectado al switch de 20.</li>
-          <li>24 PCs repartidos entre router + switch de 20 (4 en el router, 20 en el switch).</li>
+          <li>El router está conectado a Internet por el ISP.</li>
+          <li>Un puerto del router va al switch de 20.</li>
+          <li>Del switch de 20 sale un puerto al switch de 5.</li>
+          <li>Conecto:
+            <ul>
+              <li><strong>4 PCs</strong> directamente al router.</li>
+              <li><strong>18 PCs</strong> al switch de 20.</li>
+              <li><strong>2 PCs</strong> al switch de 5.</li>
+            </ul>
+          </li>
         </ul>
-        <p>Todos esos dispositivos forman una <strong>misma LAN cableada</strong> y comparten la misma salida a Internet del router.</p>
+        <p>Todos esos dispositivos forman una <strong>misma LAN cableada</strong> (LAN 1) y comparten la salida a Internet del router.</p>
 
-        <p class="step-title">3. Segunda LAN: red WiFi creada con el móvil A</p>
-        <p>Aquí hago algo menos esperado pero totalmente válido:</p>
+        <p class="step-title">3. Segunda LAN: red WiFi creada con el móvil A (LAN 2)</p>
+        <p>Aquí es donde aparece la segunda LAN:</p>
         <ul>
           <li>El móvil A ya tiene <strong>4G con contrato</strong>.</li>
           <li>Activo en el móvil A la opción de <strong>zona WiFi / compartir Internet</strong> (hotspot).</li>
-          <li>Al hacer esto, el móvil A se convierte en:
+          <li>El móvil A se convierte en:
             <ul>
               <li>Un pequeño “router” usando su 4G como salida a Internet.</li>
               <li><strong>Punto de acceso WiFi</strong> que crea una red local alrededor suyo.</li>
@@ -360,7 +372,7 @@
         <ul>
           <li><strong>LAN 1 (cableada):</strong>
             <ul>
-              <li>Router + switch de 20 + 24 PCs.</li>
+              <li>Router + switch de 20 + switch de 5 + 24 PCs.</li>
               <li>Todos con Internet a través del contrato del router.</li>
             </ul>
           </li>
@@ -376,8 +388,8 @@
         <p class="step-title">6. Gasto y condiciones cumplidas</p>
         <p>En esta solución:</p>
         <ul>
-          <li>No compro más hardware extra aparte de lo de la Solución 1.</li>
-          <li>No contrato más conexiones con el ISP (sigo con:
+          <li>No compro más hardware extra aparte del <strong>adaptador de red</strong>, el <strong>switch de 5</strong> y los <strong>cables</strong> que ya se usan en la Solución 1.</li>
+          <li>No contrato más conexiones con el ISP:
             <ul>
               <li>Contrato del router para los PCs.</li>
               <li>Contrato 4G de A y 5G de B que ya existían.</li>
@@ -398,7 +410,6 @@
   </div>
 
   <script>
-    // Click en los nodos → muestro solo la solución correspondiente
     const nodes = document.querySelectorAll(".node[data-target]");
     const solutions = document.querySelectorAll(".solution");
 
@@ -406,15 +417,12 @@
       node.addEventListener("click", () => {
         const targetId = node.getAttribute("data-target");
 
-        // activar/desactivar estilo de nodo
         nodes.forEach((n) => n.classList.remove("active"));
         node.classList.add("active");
 
-        // mostrar solo la solución seleccionada
         solutions.forEach((s) => {
           if (s.id === targetId) {
             s.classList.add("visible");
-            // scroll suave hasta el principio de la solución
             const top = s.getBoundingClientRect().top + window.scrollY - 80;
             window.scrollTo({ top, behavior: "smooth" });
           } else {
